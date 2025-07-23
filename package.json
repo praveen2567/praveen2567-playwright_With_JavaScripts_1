@@ -1,0 +1,16 @@
+{
+  "name": "playwright_with_javascripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "testCase": "npx playwright test --project=chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0"
+  }
+}
