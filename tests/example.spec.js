@@ -1,19 +1,28 @@
-// @ts-check
-const { test, expect } = require("@playwright/test");
-test("Open the site 'qaautomationlabs.com 'and verify the title and Click on Menu Blogs", async ({
-page,
-}) => {
-await page.goto("https://qaautomationlabs.com/");
-await expect(page).toHaveTitle(/About Us - QAAutomationLabs/);
-const blogs = page.locator("//span[text()='Blogs']");
-await blogs.last().click();
+const { test, expect } = require('@playwright/test');
+
+test('scroll to specific element', async ({ page }) => {
+
+    await page.goto("https://www.imdb.com/chart/top/");
+
+    let dJanagoMovieLink = await page.locator("//h3[contains(text(),'129. Hamilton')]");
+
+    //before click you scroll like requirement
+    await dJanagoMovieLink.scrollIntoViewIfNeeded();
+
+    await dJanagoMovieLink.click();
+    //validation
+    expect(await page.locator('h1 span').textContent()).toEqual('Hamilton')
+
 });
-test("Serach the Blog with text 'Playwright ", async ({ page }) => {
-await page.goto("https://qaautomationlabs.com/");
-const blogs = page.locator("//span[text()='Blogs']");
-const search = page.locator("id=wp-block-search__input-2");
-const searchIcon = page.locator("id=search-icon");
-await blogs.last().click();
-await search.type("Playwright");
-await searchIcon.click();
+
+//no need to scroll just click directly
+// Playwright automatically scrolls before click()
+test('click on Hamilton movie', async ({ page }) => {
+
+    await page.goto("https://www.imdb.com/chart/top/");
+
+    await page.locator("//h3[contains(text(),'129. Hamilton')]").click()
+    //validation
+    expect(await page.locator('h1 span').textContent()).toEqual('Hamilton')
+
 });
